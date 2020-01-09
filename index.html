@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Freelancer - Start Bootstrap Theme</title>
+  <title></title>
 
   <!-- Custom fonts for this theme -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,6 +17,10 @@
 
   <!-- Theme CSS -->
   <link href="css/freelancer.min.css" rel="stylesheet">
+
+  <!-- Mapbox Stuff -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
 
 </head>
 
@@ -71,102 +75,48 @@
     </div>
   </header>
 
-  <!-- Portfolio Section -->
-  <section class="page-section portfolio" id="portfolio">
-    <div class="container">
+  <!-- Portfolio Grid Section -->
+  <section id="portfolio">
+              <div class="container">
+      <h2 class="text-center">THE MAP</h2>
+      <hr class="star-primary">
+<div id='map' style='width: 1100px; height: 900px;'></div>
 
-      <!-- Portfolio Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+      <script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiMHJlZGZlYXRoZXIiLCJhIjoiY2puZzVlYTFmNDZ6bjN3cW8xMHAwNG53NSJ9.hQc74nd7nsRsbm_2ZWB8sw';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/0redfeather/cjnq9xxfe0vcx2spl9snvquqi',
+center: [-73.943395, 40.740066],
+zoom: 10.2
+});
 
-      <!-- Icon Divider -->
-      <div class="divider-custom">
-        <div class="divider-custom-line"></div>
-        <div class="divider-custom-icon">
-          <i class="fas fa-star"></i>
-        </div>
-        <div class="divider-custom-line"></div>
-      </div>
 
-      <!-- Portfolio Grid Items -->
-      <div class="row">
+//Attempting to Load popups onto the map
 
-        <!-- Portfolio Item 1 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/cabin.png" alt="">
-          </div>
-        </div>
+map.on('click', function(e) {
+var features = map.queryRenderedFeatures(e.point, {
+  layers: ['marvel-map-data'] // replace this with the name of the layer
+});
 
-        <!-- Portfolio Item 2 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/cake.png" alt="">
-          </div>
-        </div>
+if (!features.length) {
+  return;
+}
 
-        <!-- Portfolio Item 3 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/circus.png" alt="">
-          </div>
-        </div>
+var feature = features[0];
 
-        <!-- Portfolio Item 4 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal4">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/game.png" alt="">
-          </div>
-        </div>
+var popup = new mapboxgl.Popup({ offset: [0, -15] })
+  .setLngLat(feature.geometry.coordinates)
+  .setHTML('<h5>' + feature.properties.name + '</h6><p>' + feature.properties.description  + '</p>' + '<img src="' + feature.properties.img + '" alt="' + feature.properties.name + '" style="width:175px;height:250px;">' + '<p><a href="' + feature.properties.link + '">' + feature.properties.name + '</a></p>')
+  .setLngLat(feature.geometry.coordinates)
+  .addTo(map);
 
-        <!-- Portfolio Item 5 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal5">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/safe.png" alt="">
-          </div>
-        </div>
+});
 
-        <!-- Portfolio Item 6 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal6">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/submarine.png" alt="">
-          </div>
-        </div>
 
-      </div>
-      <!-- /.row -->
+</script>
+</section>
 
-    </div>
-  </section>
 
   <!-- About Section -->
   <section class="page-section bg-primary text-white mb-0" id="about">
