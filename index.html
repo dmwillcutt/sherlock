@@ -113,7 +113,7 @@
 
           var popup = new mapboxgl.Popup({ offset: [0, -15] })
             .setLngLat(feature.geometry.coordinates)
-            .setHTML('<h5>' + feature.properties.name + '</h6><p>' + 'div {width: 200px; word-break: break-all; white-space: normal;}' feature.properties.description  + '</p>' + '<img src="' + feature.properties.img + '" alt="' + feature.properties.name + '" style="width:175px;height:250px;">' + '<p><a href="' + feature.properties.link + '">' + feature.properties.name + '</a></p>')
+            .setHTML('<h5>' + feature.properties.name + '</h6><p>' + 'div {width: 200px; word-break: break-all; white-space: normal;}' + feature.properties.description  + '</p>' + '<img src="' + feature.properties.img + '" alt="' + feature.properties.name + '" style="width:175px;height:250px;">' + '<p><a href="' + feature.properties.link + '">' + feature.properties.name + '</a></p>')
             .setLngLat(feature.geometry.coordinates)
             .addTo(map);
           });
