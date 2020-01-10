@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Freelancer - Start Bootstrap Theme</title>
+  <title>Elementary, Watson</title>
 
   <!-- Custom fonts for this theme -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,6 +17,10 @@
 
   <!-- Theme CSS -->
   <link href="css/freelancer.min.css" rel="stylesheet">
+
+  <!-- Mapbox Stuff -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
 
 </head>
 
@@ -33,13 +37,13 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portfolio</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">The Map</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Visit</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">The Team</a>
           </li>
         </ul>
       </div>
@@ -54,7 +58,7 @@
       <img class="masthead-avatar mb-5" src="img/Sherlock Holmes.jpg" alt="">
 
       <!-- Masthead Heading -->
-      <h1 class="masthead-heading text-uppercase mb-0">Sherlock Holmes in London</h1>
+      <h1 class="masthead-heading text-uppercase mb-0">Sherlock Holmes Throughout London</h1>
 
       <!-- Icon Divider -->
       <div class="divider-custom divider-light">
@@ -66,107 +70,59 @@
       </div>
 
       <!-- Masthead Subheading -->
-      <p class="masthead-subheading font-weight-light mb-0">Travel through the streets of London to experience the lore surrounding Sherlock Holmes. The map below takes you on a journey through the life and times of the infamous detective, as well as through modern day sites of memorial for the literary and film hero. </p>
+      <p class="masthead-subheading font-weight-light mb-0">Travel through the streets of London to experience the lore surrounding Sherlock Holmes. The map below takes you on a (digital) journey through the life and times of the infamous detective, as well as through modern day sites of memorial for the literary and film hero. </p>
 
     </div>
   </header>
 
-  <!-- Portfolio Section -->
-  <section class="page-section portfolio" id="portfolio">
-    <div class="container">
+  <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+      <div class="container">
 
-      <!-- Portfolio Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+  <!-- Portfolio Section Heading -->
+    <b>
+    <h2 class="text-center text-uppercase text-secondary mb-0">Watson this Map?</h2>
+    <b>
 
-      <!-- Icon Divider -->
-      <div class="divider-custom">
-        <div class="divider-custom-line"></div>
-        <div class="divider-custom-icon">
-          <i class="fas fa-star"></i>
-        </div>
-        <div class="divider-custom-line"></div>
-      </div>
+    <!--   <h2 class="text-center">THE MAP</h2> -->
+      <hr class="star-primary">
+      <div id='map' style='width: 1100px; height: 900px;'></div>
 
-      <!-- Portfolio Grid Items -->
-      <div class="row">
+      <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiMHJlZGZlYXRoZXIiLCJhIjoiY2puZzVlYTFmNDZ6bjN3cW8xMHAwNG53NSJ9.hQc74nd7nsRsbm_2ZWB8sw';
+        var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/0redfeather/ck578vw2d03gg1co4dkmu5bd1',
+          center: [-0.113135, 51.494838],
+          zoom: 10.2
+        });
 
-        <!-- Portfolio Item 1 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/cabin.png" alt="">
-          </div>
-        </div>
 
-        <!-- Portfolio Item 2 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/cake.png" alt="">
-          </div>
-        </div>
+//Attempting to Load popups onto the map
 
-        <!-- Portfolio Item 3 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/circus.png" alt="">
-          </div>
-        </div>
+        map.on('click', function(e) {
+          var features = map.queryRenderedFeatures(e.point, {
+            layers: ['holmes'] // replace this with the name of the layer
+          });
 
-        <!-- Portfolio Item 4 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal4">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/game.png" alt="">
-          </div>
-        </div>
+          if (!features.length) {
+            return;
+          }
 
-        <!-- Portfolio Item 5 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal5">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/safe.png" alt="">
-          </div>
-        </div>
+          var feature = features[0];
 
-        <!-- Portfolio Item 6 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal6">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/submarine.png" alt="">
-          </div>
-        </div>
+          var popup = new mapboxgl.Popup({ offset: [0, -15] })
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML('<h5>' + feature.properties.name + '</h6><p>' + feature.properties.description  + '</p>' + '<img src="' + feature.properties.img + '" alt="' + feature.properties.name + '" style="width:175px;height:250px;">' + '<p><a href="' + feature.properties.link + '">' + feature.properties.name + '</a></p>')
+            .setLngLat(feature.geometry.coordinates)
+            .addTo(map);
+          });
 
-      </div>
-      <!-- /.row -->
+        //  Possible text wrapping code
+        //  'div {width: 200px; word-break: break-all; white-space: normal;}' +
+</script>
+</section>
 
-    </div>
-  </section>
 
   <!-- About Section -->
   <section class="page-section bg-primary text-white mb-0" id="about">
@@ -187,18 +143,20 @@
       <!-- About Section Content -->
       <div class="row">
         <div class="col-lg-4 ml-auto">
-          <p class="lead">Use our map to take yourself on a tour of Sherlock Holmes' sites in London. </p>
+          <p class="lead">Use our map to take yourself on a tour of Sherlock Holmes' sites in London. Learn more about everyone's favorite British dectective by visiting famous sites of memory, the Sherlock Holmes Museum, and even the Sherlock Holmes Pub! </p>
         </div>
         <div class="col-lg-4 mr-auto">
-          <p class="lead">There are also plenty of Sherlock Holmes guided tours to partake in while you are London.</p>
+          <p class="lead">There are also plenty of Sherlock Holmes guided tours to partake in while you are London. Click the link below to learn more about the physical tours available in London.</p>
         </div>
       </div>
 
       <!-- About Section Button -->
       <div class="text-center mt-4">
-        <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/themes/freelancer/">
-          <i class="fas fa-download mr-2"></i>
-          Free Download!
+
+        <a class="btn btn-xl btn-outline-light" href="https://www.viator.com/London-attractions/Sherlock-Holmes-Museum/d737-a8244">
+          <i class="fas fa-info mr-2"></i>
+          Experiences
+
         </a>
       </div>
 
@@ -210,7 +168,7 @@
     <div class="container">
 
       <!-- Contact Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">The Team</h2>
 
       <!-- Icon Divider -->
       <div class="divider-custom">
@@ -221,45 +179,10 @@
         <div class="divider-custom-line"></div>
       </div>
 
-      <!-- Contact Section Form -->
+      <!-- Biographies -->
       <div class="row">
         <div class="col-lg-8 mx-auto">
-          <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-          <form name="sentMessage" id="contactForm" novalidate="novalidate">
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                <label>Name</label>
-                <input class="form-control" id="name" type="text" placeholder="Name" required="required" data-validation-required-message="Please enter your name.">
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                <label>Email Address</label>
-                <input class="form-control" id="email" type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address.">
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                <label>Phone Number</label>
-                <input class="form-control" id="phone" type="tel" placeholder="Phone Number" required="required" data-validation-required-message="Please enter your phone number.">
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                <label>Message</label>
-                <textarea class="form-control" id="message" rows="5" placeholder="Message" required="required" data-validation-required-message="Please enter a message."></textarea>
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-            <br>
-            <div id="success"></div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
-            </div>
-          </form>
+          <p class="lead">Sandy Burnley is a Sherlock Holmes fanatic, adopting a mastiff and painting him white after reading Doyles's Hounds of the Baskervilles. Fed up with the frustation, the mastiff left Sandy in the woods during a hike and she was never seen again.</p>
         </div>
       </div>
 
