@@ -1,0 +1,39 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "New Scotland Yard",
+        "description": "The New Scotland Yard is where Benedict Cumberbatch consults with police in the relatively recent BBC Sherlock series",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/0/0e/New_Scotland_Yard_sign_3.jpg",
+        "link": "https://bakerstreet.fandom.com/wiki/New_Scotland_Yard"
+      },
+      "geometry": {
+        "coordinates": [
+          -0.124261,
+          51.502759
+        ],
+        "type": "Point"
+      },
+      "id": "6758a021152f1a978309dd306b6d159c"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "221 Baker Street",
+        "description": "The original home of Sherlock Holmes according to Sir Arthur Ignatius Conan Doyle. The site is now a museum dedicated to all things Sherlock!",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/3/33/221B_Baker_Street%2C_London_-_Sherlock_Holmes_Museum.jpg",
+        "link": "https://en.wikipedia.org/wiki/221B_Baker_Street"
+      },
+      "geometry": {
+        "coordinates": [
+          -0.158555,
+          51.523642
+        ],
+        "type": "Point"
+      },
+      "id": "923cc2b6f349c14f7ecea3d0620a64da"
+    }
+  ],
+  "type": "FeatureCollection"
+}
