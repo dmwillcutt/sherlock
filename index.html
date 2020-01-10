@@ -37,7 +37,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portfolio</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">The Map</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
@@ -86,38 +86,37 @@
 
     <!--   <h2 class="text-center">THE MAP</h2> -->
       <hr class="star-primary">
-<div id='map' style='width: 1100px; height: 900px;'></div>
+      <div id='map' style='width: 1100px; height: 900px;'></div>
 
       <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoiMHJlZGZlYXRoZXIiLCJhIjoiY2puZzVlYTFmNDZ6bjN3cW8xMHAwNG53NSJ9.hQc74nd7nsRsbm_2ZWB8sw';
-var map = new mapboxgl.Map({
-container: 'map',
-style: 'mapbox://styles/0redfeather/ck578vw2d03gg1co4dkmu5bd1',
-center: [-0.113135, 51.494838],
-zoom: 10.2
-});
+        mapboxgl.accessToken = 'pk.eyJ1IjoiMHJlZGZlYXRoZXIiLCJhIjoiY2puZzVlYTFmNDZ6bjN3cW8xMHAwNG53NSJ9.hQc74nd7nsRsbm_2ZWB8sw';
+        var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/0redfeather/ck578vw2d03gg1co4dkmu5bd1',
+          center: [-0.113135, 51.494838],
+          zoom: 10.2
+        });
 
 
 //Attempting to Load popups onto the map
 
-map.on('click', function(e) {
-var features = map.queryRenderedFeatures(e.point, {
-  layers: ['0redfeather.ck30kboza02842oqybgassf1p-0bnss'] // replace this with the name of the layer
-});
+        map.on('click', function(e) {
+          var features = map.queryRenderedFeatures(e.point, {
+            layers: ['Holmes'] // replace this with the name of the layer
+          });
 
-if (!features.length) {
-  return;
-}
+          if (!features.length) {
+            return;
+          }
 
-var feature = features[0];
+          var feature = features[0];
 
-var popup = new mapboxgl.Popup({ offset: [0, -15] })
-  .setLngLat(feature.geometry.coordinates)
-  .setHTML('<h5>' + feature.properties.name + '</h6><p>' + feature.properties.description  + '</p>' + '<img src="' + feature.properties.img + '" alt="' + feature.properties.name + '" style="width:175px;height:250px;">' + '<p><a href="' + feature.properties.link + '">' + feature.properties.name + '</a></p>')
-  .setLngLat(feature.geometry.coordinates)
-  .addTo(map);
-
-});
+          var popup = new mapboxgl.Popup({ offset: [0, -15] })
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML('<h5>' + feature.properties.name + '</h6><p>' + feature.properties.description  + '</p>' + '<img src="' + feature.properties.img + '" alt="' + feature.properties.name + '" style="width:175px;height:250px;">' + '<p><a href="' + feature.properties.link + '">' + feature.properties.name + '</a></p>')
+            .setLngLat(feature.geometry.coordinates)
+            .addTo(map);
+          });
 
 
 </script>
